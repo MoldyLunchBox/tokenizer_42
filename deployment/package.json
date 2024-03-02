@@ -1,5 +1,25 @@
 {
+  "name": "42pong",
+  "version": "1.0.0",
+  "description": "test token minter for pingpong game to use as reward for beating the computer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MoldyLunchBox"
+  },
+  "keywords": [
+    "token",
+    "etherium",
+    "42",
+    "1337",
+    "tokenizer"
+  ],
+  "author": "abderrahmane mya",
+  "license": "MIT",
   "dependencies": {
-    "truffle": "^5.11.5"
+    "@openzeppelin/contracts": "^5.0.2"
   }
 }
