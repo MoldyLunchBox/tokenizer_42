@@ -13,6 +13,7 @@ In the blockchain context, minting typically involves the creation of new tokens
 The minting process is usually carried out by executing specific functions defined within the token smart contract. These functions may require certain permissions or conditions to be met before new tokens can be minted. For example, only authorized addresses may have the ability to mint new tokens, or there may be a limit on the total number of tokens that can ever be minted.
 
 Once new tokens are minted, they become part of the circulating supply and can be transferred or traded like any other token. Minting plays a crucial role in token economics and can impact factors such as supply and demand, token value, and overall ecosystem dynamics.
+
 ## Significance of Tokens:
 
 Tokens play a crucial role in the blockchain ecosystem, offering several benefits:
