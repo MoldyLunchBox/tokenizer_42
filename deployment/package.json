@@ -1,5 +1,5 @@
 {
-  "name": "42pong",
+  "name": "pong42",
   "version": "1.0.0",
   "description": "test token minter for pingpong game to use as reward for beating the computer",
   "main": "index.js",
