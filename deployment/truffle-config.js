@@ -2,14 +2,14 @@ module.exports = {
   networks: {
     development: {
       host: "localhost",
-      port: 8545,
+      port: 1337,
       network_id: "*", // Match any network id
       gas: 5000000
     }
   },
   compilers: {
     solc: {
-      version:'0.8.20',
+      version:'0.8.0',
       settings: {
         optimizer: {
           enabled: true, // Default: false
