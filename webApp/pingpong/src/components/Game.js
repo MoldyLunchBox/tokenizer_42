@@ -105,7 +105,7 @@ export const Game = () => {
                 <div className='h-10 flex text-sm  flex-row my-5 text-white font-semibold items-center  w-full sm:text-lg lg:text-2xl'>
                     {!gameState.length ?
 
-                        <div class="absolute inset-0 top-10  flex items-center justify-center">
+                        <div className="absolute inset-0 top-10  flex items-center justify-center">
                             <div className='w-1/3 h-1/3 max-w-[300px] backdrop-blur-sm  flex items-center gap-2 flex-col justify-center bg-white/30 sm:gap-11 rounded-lg bg-white'>
 
                                 <div className='text-center bg-white bg-opacity-25 rounded-sm w-full font-extrabold text-xs  text-[#1e1b4b] sm:text-lg'>
@@ -137,7 +137,7 @@ export const Game = () => {
                 <div className="relative w-full ">
                     <div className="rounded border border-red-500 p-1">
                         <div className="flex h-6 p-2 items-center justify-center rounded bg-red-300 text-xs leading-none" style={containerStyle}>
-                            <div class="absolute inset-0  flex items-center justify-center">
+                            <div className="absolute inset-0  flex items-center justify-center">
                                 <span className="p-1 text-sm text-white">Ball speed</span>
                             </div>
                         </div>
