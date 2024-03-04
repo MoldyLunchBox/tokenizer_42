@@ -52,3 +52,7 @@
 
 ## Conclusion
 Completing these steps will enable you to develop and deploy your own token on the blockchain, demonstrating proficiency in blockchain technology and programming skills.
+
+
+
+blossom define october shove strong ill property lava lizard gate bike satoshi
