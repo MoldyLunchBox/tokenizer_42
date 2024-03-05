@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Capped.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Pong42 is ERC20Capped, Ownable {
-    constructor(uint256 cap) ERC20("Pong42", "P42") ERC20Capped(cap) {}
-
-    function mintTokens(address to, uint256 amount) external onlyOwner {
-        _mint(to, amount);
+contract Pong42 is ERC20, Ownable {
+    constructor() ERC20("Pong42", "p42") {
+        uint256 initialSupply =  42 * 1000000 * (10 ** uint(decimals()));
+       
+        _mint(msg.sender, initialSupply);
     }
 
     function transferTokens(address to, uint256 amount) external returns (bool) {
