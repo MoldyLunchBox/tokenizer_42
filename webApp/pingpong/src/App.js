@@ -1,46 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
-import { Game } from './components/Game';
-import { useEffect, useState } from 'react';
-import { WalletConnect } from './components/WalletConnect';
+import React, { useState } from 'react';
+import axios from 'axios'; // Import axios for making HTTP requests
 
 function App() {
+  const [recipientAddress, setRecipientAddress] = useState('');
+  const [message, setMessage] = useState('');
 
-  const [connected, setConnected] = useState(false);
+  // Function to handle token request
+  const handleTokenRequest = async () => {
+    try {
+      // Make a POST request to your faucet endpoint
+      const response = await axios.post('http://localhost:3001/faucet', {
+        recipient: recipientAddress
+      });
 
-const connectWallet = async () => {
-  if (window.ethereum) {
-      try {
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          setConnected(true);
-      } catch (error) {
-          console.error('User denied wallet connection');
+      // Handle response
+      if (response.data.success) {
+        setMessage('Tokens sent successfully!');
+      } else {
+        setMessage('Failed to send tokens. Please try again.');
       }
-  } else {
-      console.error('MetaMask is not installed');
-  }
-};
-
-// useEffect(() => {
-//   console.log(window.ethereum.selectedAddress)
-//   const walletIsConnected = async()=>{
-//     const ret = await window.ethereum.request({method: 'eth_accounts'})
-//     return ret.length ? true : false
-//   }
-//   if (window.ethereum) {
-//     const  wallet  = walletIsConnected()
-//     console.log(wallet)
-//     if (walletIsConnected())
-//       setConnected(true);
-//   }
-// }, []);
+    } catch (error) {
+      console.error('Error occurred while requesting tokens:', error);
+      setMessage('Error occurred while requesting tokens. Please try again.');
+    }
+  };
 
   return (
-    <div className="w-full h-[100vh] flex flex-col  bg-gradient-to-b from-black to-[#1e293b]">
-        <WalletConnect connected={connected} connectWallet={connectWallet} />
-      <h1 className="flex items-center text-2xl font-extrabold my-10 justify-center text-white dark:text-white sm:text-4xl lg:text-6xl lg:my-20" >Ping Pong<span className="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">But you can win</span></h1>
-
-      <Game />
+    <div>
+      <h1>Faucet Application</h1>
+      <input
+        type="text"
+        placeholder="Enter your wallet address"
+        value={recipientAddress}
+        onChange={(e) => setRecipientAddress(e.target.value)}
+      />
+      <button onClick={handleTokenRequest}>Request Tokens</button>
+      {message && <p>{message}</p>}
     </div>
   );
 }
