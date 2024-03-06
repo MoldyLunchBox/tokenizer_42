@@ -1,26 +1,20 @@
 {
-  "name": "pong42",
+  "name": "ocean-token",
   "version": "1.0.0",
-  "description": "test token minter for pingpong game to use as reward for beating the computer",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MoldyLunchBox"
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^1.0.1",
+    "chai": "^4.3.6",
+    "hardhat": "^2.11.1"
   },
-  "keywords": [
-    "token",
-    "etherium",
-    "42",
-    "1337",
-    "tokenizer"
-  ],
-  "author": "abderrahmane mya",
-  "license": "MIT",
   "dependencies": {
-    "@openzeppelin/contracts": "^4.5.0",
-    "@truffle/hdwallet-provider": "^2.1.15"
+    "@openzeppelin/contracts": "^4.7.3",
+    "dotenv": "^16.0.2"
   }
 }
