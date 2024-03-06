@@ -2,13 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Matter from 'matter-js'
 import { MatterJsModules } from '../utils/MatterJsModules';
 
-export const Game = () => {
+export const Game = ({players, setPlayers, gameState, setGameState}) => {
     const aspect = 16 / 9
     const [height, setHeight] = useState(0)
     const [width, setWidth] = useState(375 * aspect)
-    const [gameState, setGameState] = useState("")
     const [matterjsInstance, setMatterjsInstance] = useState(null)
-    const [players, setPlayers] = useState({ you: 0, comp: 0 })
     const [ballSpeed, setBallSpeed] = useState(10)
     const [countDown, setCountDown] = useState(3)
     const [goal, setGoal] = useState(false)
@@ -43,6 +41,11 @@ export const Game = () => {
 
             matterjsInstance.modules.Body.setVelocity(matterjsInstance.bodies.ball, { x: 5, y: 6 });
 
+        }
+        else if (matterjsInstance){
+            matterjsInstance.modules.Body.setVelocity(matterjsInstance.bodies.ball, { x: 0, y: 0 });
+            matterjsInstance.modules.Body.setPosition(matterjsInstance.bodies.ball, { x: matterjsInstance.obj.divWidth / 2, y: matterjsInstance.obj.divHeight / 2 });
+ 
         }
     }, [gameState])
 

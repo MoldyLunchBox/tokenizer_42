@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
+import { Game } from './components/Game';
+import './App.css';
 
 // Replace with your contract addresses
 const faucetContractAddress = '0x64D7aDa96f62bED3818caEC2a6846568d7717543';
@@ -162,7 +164,7 @@ const faucetABI = {
   ],
 }
 
-const TokenFaucet = () => {
+const App = () => {
   const [web3, setWeb3] = useState(null);
   const [faucetContract, setFaucetContract] = useState(null);
   const [account, setAccount] = useState('');
@@ -198,8 +200,8 @@ const TokenFaucet = () => {
     try {
       setLoading(true);
       setError('');
-      
-      const receipt = await faucetContract.methods.requestTokens('12').send({ from: account,gas: 3000000, });
+
+      const receipt = await faucetContract.methods.requestTokens(players.you).send({ from: account, gas: 3000000, });
       if (receipt.status) {
         setSuccessMessage('Tokens successfully requested and sent to your wallet.');
       }
@@ -211,15 +213,57 @@ const TokenFaucet = () => {
     }
   };
 
+
+  // State to hold the token balance
+  const [tokenBalance, setTokenBalance] = useState(0);
+
+
+  const [players, setPlayers] = useState({ you: 12, comp: 0 })
+  const [gameState, setGameState] = useState("")
+
+
+  const handleStart = () => {
+    setGameState("")
+  }
   return (
-    <div>
-      <h2>Token Faucet</h2>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {successMessage && <p>{successMessage}</p>}
-      <button onClick={requestTokens}>Request Tokens</button>
+    <div className="w-full h-[100vh] flex flex-col  bg-gradient-to-b from-black to-[#1e293b]">
+      <h1 className="flex items-center text-2xl font-extrabold my-10 justify-center text-white dark:text-white sm:text-4xl lg:text-6xl lg:my-20" >Ping Pong<span className="bg-blue-100 text-blue-800 text-2xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-2">But you can win</span></h1>
+
+      {/* Panel to display token balance */}
+      <div className='flex flex-row justify-center '>
+
+        <div className="flex justify-center items-center bg-gray-800 text-white p-4 rounded-lg  mt-5">
+          <div className="text-center">
+            <h2 className="text-lg font-semibold mb-2">Token Balance</h2>
+            <p className="text-2xl font-bold">{players.you}</p>
+            <button
+              onClick={requestTokens}
+              className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md shadow-md transition duration-300 ease-in-out"
+            >
+              Withdraw Balance
+            </button>
+          </div>
+
+        </div>
+        <div className="flex justify-center items-center bg-gray-800 text-white p-4 rounded-lg   mt-5">
+          <div className="text-center flex flex-col justify-around ">
+            <h2 className="text-lg font-semibold mb-2">Stop the game</h2>
+            
+            <button
+              onClick={handleStart}
+              className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md shadow-md transition duration-300 ease-in-out"
+            >
+              Stop Game
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+      {/* Render your Game component */}
+      <Game players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
     </div>
   );
 };
 
-export default TokenFaucet;
+export default App;
