@@ -10,7 +10,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 contract Pong42 is ERC20Capped, ERC20Burnable {
     address payable public owner;
 
-    constructor(uint256 cap, uint256 reward) ERC20("pong42", "P42") ERC20Capped(cap * (10 ** decimals())) {
+    constructor(uint256 cap) ERC20("pong42", "P42") ERC20Capped(cap * (10 ** decimals())) {
         owner = payable(msg.sender);
         _mint(owner, 70000000 * (10 ** decimals()));
     }
