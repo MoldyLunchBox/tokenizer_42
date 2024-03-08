@@ -45,12 +45,16 @@ export const TranferTokens = ({ rewards, setRewards, setSuccessMessage, setError
         try {
             setLoading(true);
             setError('');
-
-            const receipt = await faucetContract.methods.requestTokens(rewards).send({ from: account, gas: 3000000, });
-            if (receipt.status) {
+            const balanceCheck = await faucetContract.methods.getBalance().call()
+            const balance = Number(balanceCheck.toString()) / 1e18;
+            if (balance >= rewards) {
+                const receipt = await faucetContract.methods.requestTokens(rewards).send({ from: account, gas: 3000000, });
                 setSuccessMessage('Tokens successfully requested and sent to your wallet.');
                 localStorage.setItem('p42_rewards', 0);
 
+            }
+            else{
+                setError('Failed to request tokens, Faucet balance is too low');
             }
         } catch (error) {
             console.error(error);
