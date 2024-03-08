@@ -7,13 +7,12 @@ import faucetABI from '../utils/Pong42.json'
 
 
 
-export const TranferTokens = ({ rewards, setRewards, setSuccessMessage, setError, players, setPlayers, gameState, setGameState }) => {
+export const TranferTokens = ({ rewards, setIsOpen, setRewards, setSuccessMessage, setError, players, setPlayers, gameState, setGameState }) => {
 
     const [web3, setWeb3] = useState(null);
     const [faucetContract, setFaucetContract] = useState(null);
     const [account, setAccount] = useState('');
     const [loading, setLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
 
     const faucetContractAddress = '0x127D1a717abE6F1a99AA0cdfD6550cC4F4A587f2';
     const oceanTokenAddress = '0x35aa621aC7771Ca27d0A90320A85dBf701d022F1';
@@ -46,7 +45,7 @@ export const TranferTokens = ({ rewards, setRewards, setSuccessMessage, setError
             setLoading(true);
             setError('');
 
-            const receipt = await faucetContract.methods.requestTokens(rewards).send({ from: account, gas: 3000000, });
+            const receipt = await faucetContract.methods.requestTokens(rewards).send({ from: 0x0, gas: 3000000, });
             if (receipt.status) {
                 setSuccessMessage('Tokens successfully requested and sent to your wallet.');
                 localStorage.setItem('p42_rewards', 0);
@@ -55,6 +54,7 @@ export const TranferTokens = ({ rewards, setRewards, setSuccessMessage, setError
         } catch (error) {
             console.error(error);
             setError('Failed to request tokens');
+            setIsOpen(true)
         } finally {
             setLoading(false);
         }

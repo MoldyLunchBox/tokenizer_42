@@ -43,6 +43,7 @@ useEffect(()=>{
         if (error)
         setIsOpen(true);
         
+        console.log('error:' , error)
     },[error])
     return (
         <div className='flex flex-col max-w-lg rounded bg-no-repeat bg-center bg-[#1e293b] tilted-div py-10 px-8 w-full text-white opacity-80'
@@ -57,13 +58,13 @@ useEffect(()=>{
                         <div className='text-sm text-gray-400'>P42</div>
                     </div>
                 </div>
-                <TranferTokens rewards={rewards} setRewards={setRewards} setSuccessMessage={setSuccessMessage} setError={setError} players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
+                <TranferTokens setIsOpen={setIsOpen} rewards={rewards} setRewards={setRewards} setSuccessMessage={setSuccessMessage} setError={setError} players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
                 <div className='flex flex-col'>
                     <div className='text-lg font-semibold text-blue-400'>Status</div>
                     <div> {successMessage}</div>
                 </div>
             </div>
-            <AlertModal text={error} />
+            <AlertModal text={error} setIsOpen={setIsOpen}/>
         </div>
     )
 }

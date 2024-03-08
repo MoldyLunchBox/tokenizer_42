@@ -4,7 +4,10 @@ import Modal from 'react-modal';
 // Make sure to bind modal to your app element (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root');
 
-const AlertModal = ({ text }) => {
+const AlertModal = ({ text , setIsOpen}) => {
+    const handleClose = () =>{
+        setIsOpen(false)
+    }
     return (
 <dialog id="my_modal_1" className="modal text-black">
   <div className="modal-box">
@@ -13,7 +16,7 @@ const AlertModal = ({ text }) => {
     <div className="modal-action">
       <form method="dialog">
         {/* if there is a button in form, it will close the modal */}
-        <button className="btn">Close</button>
+        <button className="btn" onClick={handleClose}>Close</button>
       </form>
     </div>
   </div>
