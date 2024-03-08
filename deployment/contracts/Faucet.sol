@@ -42,7 +42,10 @@ contract Faucet {
             block.timestamp >= nextAccessTime[msg.sender],
             "Insufficient time elapsed since last withdrawal - try again later."
         );
-
+        require(
+            amount <= 50,
+            "max amount is 50"
+        );
         nextAccessTime[msg.sender] = block.timestamp + lockTime;
 
         token.transfer(msg.sender, amount * withdrawalAmount);
