@@ -24,9 +24,9 @@ const Panel = ({ rewards, setRewards, players, setPlayers, gameState, setGameSta
         };
     }, []);
 
-useEffect(()=>{
-    
-},[players.you])
+    useEffect(() => {
+
+    }, [players.you])
     const openModal = () => {
         setIsOpen(true);
     };
@@ -39,16 +39,18 @@ useEffect(()=>{
 
     }, [isOpen])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (error)
-        setIsOpen(true);
-        
-        console.log('error:' , error)
-    },[error])
+            setIsOpen(true);
+
+        console.log('error:', error)
+    }, [error])
     return (
         <div className='flex flex-col max-w-lg rounded bg-no-repeat bg-center bg-[#1e293b] tilted-div py-10 px-8 w-full text-white opacity-80'
-         style={{ backgroundImage: "url('https://images.unsplash.com/photo-1645516484419-35a747c99474?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-          backgroundSize: "100%" }} >
+            style={{
+                backgroundImage: "url('https://images.unsplash.com/photo-1645516484419-35a747c99474?q=80&w=1827&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+                backgroundSize: "100%"
+            }} >
             <div className='flex flex-col gap-4'>
                 <div className='text-xl font-bold mb-5'>Token: Pong42 (P42)</div>
                 <div className='flex flex-row justify-between border-b'>
@@ -61,10 +63,20 @@ useEffect(()=>{
                 <TranferTokens setIsOpen={setIsOpen} rewards={rewards} setRewards={setRewards} setSuccessMessage={setSuccessMessage} setError={setError} players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
                 <div className='flex flex-col'>
                     <div className='text-lg font-semibold text-blue-400'>Status</div>
-                    <div> {successMessage}</div>
+                    <div> {successMessage}
+
+                        {
+                            !gameState ?
+                                <div className='flex flex-row justify-between'>
+                                    <div className='text-sm text-green-400'>Match started</div>
+                                    <button className={`${gameState ? 'bg-[#f75959]' : 'bg-green-400'} px-2 py-1 rounded`}>Pause Game</button>
+                                </div>
+                                : null
+                        }
+                    </div>
                 </div>
             </div>
-            <AlertModal text={error} setIsOpen={setIsOpen}/>
+            <AlertModal text={error} setIsOpen={setIsOpen} />
         </div>
     )
 }
