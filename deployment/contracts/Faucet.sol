@@ -35,7 +35,7 @@ contract Faucet {
             "Request must not originate from a zero account"
         );
         require(
-            token.balanceOf(address(this)) >= withdrawalAmount,
+            token.balanceOf(address(this)) >= amount * withdrawalAmount,
             "Insufficient balance in faucet for withdrawal request"
         );
         require(
@@ -57,10 +57,6 @@ contract Faucet {
 
     function getBalance() external view returns (uint256) {
         return token.balanceOf(address(this));
-    }
-
-    function setWithdrawalAmount(uint256 amount) public onlyOwner {
-        withdrawalAmount = amount ;
     }
 
     function setLockTime(uint256 amount) public onlyOwner {
