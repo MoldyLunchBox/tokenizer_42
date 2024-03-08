@@ -1,12 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  const MyaToken = await hre.ethers.getContractFactory("MyaToken");
-  const myaToken = await MyaToken.deploy(100000000, 50);
+  const Pong42 = await hre.ethers.getContractFactory("Pong42");
+  const pong42 = await Pong42.deploy(100000000);
 
-  await myaToken.deployed();
+  await pong42.deployed();
 
-  console.log("myaToken  deployed: ", myaToken.address);
+  console.log("pong42  deployed: ", pong42.address);
 }
 
 main().catch((error) => {
