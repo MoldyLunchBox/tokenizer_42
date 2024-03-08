@@ -29,15 +29,6 @@ const App = () => {
     }
   }, [])
 
-  // Function to increment count
-  const incrementRewards = () => {
-    setRewards(prevCount => prevCount + 1);
-  };
-
-  // Function to reset count
-  const resetRewards = () => {
-    setRewards(0);
-  };
 
   useEffect(() => {
     if (players.you!= 5)
@@ -57,7 +48,7 @@ const App = () => {
       <div className='flex justify-center'>
         <Panel rewards={rewards} setRewards={setRewards} players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
       </div>
-      {/* Render your Game component */}
+      
       <Game players={players} setPlayers={setPlayers} gameState={gameState} setGameState={setGameState} />
     </div>
   );
