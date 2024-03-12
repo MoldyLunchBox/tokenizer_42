@@ -43,7 +43,6 @@ export const TranferTokens = ({ rewards, setIsOpen, setRewards, setSuccessMessag
         try {
             setLoading(true);
             setError('');
-            console.log('addresso f faucet',faucetContractAddress)
             const balanceCheck = await faucetContract.methods.getBalance().call()
             const balance = Number(balanceCheck.toString()) / 1e18;
             console.log(balance)
