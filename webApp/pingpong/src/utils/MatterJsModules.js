@@ -252,7 +252,7 @@ export class MatterJsModules {
                 this.bodies.ball.velocity.y *= scalingFactor;
                 this.modules.Body.setVelocity(this.bodies.ball, { x: this.bodies.ball.velocity.x * scalingFactor, y: this.bodies.ball.velocity.y * scalingFactor });
             }
-            else if (speed < 20)
+            else if (speed < 10)
             this.modules.Body.setPosition(this.bodies.othersPaddle, { x: this.bodies.othersPaddle.position.x, y: this.bodies.ball.position.y });
 
             //handle winner
