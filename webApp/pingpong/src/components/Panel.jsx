@@ -66,10 +66,10 @@ const Panel = ({ rewards, setRewards, players, setPlayers, gameState, setGameSta
                     <div> {successMessage}
 
                         {
-                            !gameState ?
+                            gameState ?
                                 <div className='flex flex-row justify-between'>
                                     <div className='text-sm text-green-400'>Match started</div>
-                                    <button className={`${gameState ? 'bg-[#f75959]' : 'bg-green-400'} px-2 py-1 rounded`}>Pause Game</button>
+                                    <button onClick={()=>{setGameState("")}} className={`${gameState ? 'bg-[#f75959]' : 'bg-green-400'} px-2 py-1 rounded`}>Pause Game</button>
                                 </div>
                                 : null
                         }

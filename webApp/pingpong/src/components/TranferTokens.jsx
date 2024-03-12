@@ -14,8 +14,8 @@ export const TranferTokens = ({ rewards, setIsOpen, setRewards, setSuccessMessag
     const [account, setAccount] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const faucetContractAddress = '0x127D1a717abE6F1a99AA0cdfD6550cC4F4A587f2';
-    const oceanTokenAddress = '0x35aa621aC7771Ca27d0A90320A85dBf701d022F1';
+    
+    const faucetContractAddress = process.env.REACT_APP_FAUCET_ADDRESS
     // Initialize Web3 and contract instance
     useEffect(() => {
         const initWeb3 = async () => {
@@ -40,19 +40,25 @@ export const TranferTokens = ({ rewards, setIsOpen, setRewards, setSuccessMessag
     // Function to request tokens from the faucet
     const requestTokens = async () => {
         if (!web3 || !faucetContract) return;
-
         try {
             setLoading(true);
             setError('');
             const balanceCheck = await faucetContract.methods.getBalance().call()
             const balance = Number(balanceCheck.toString()) / 1e18;
+            console.log(balance)
             if (balance >= rewards) {
                 const receipt = await faucetContract.methods.requestTokens(rewards).send({ from: account, gas: 3000000, });
-                setSuccessMessage('Tokens successfully requested and sent to your wallet.');
-                localStorage.setItem('p42_rewards', 0);
-
+                if (receipt.status) {
+                    setSuccessMessage('Tokens successfully requested and sent to your wallet.');
+                    localStorage.setItem('p42_rewards', 0);
+                    setRewards(0)
+                }
+                else {
+                    setError('Failed to request tokens');
+                    setIsOpen(true)
+                }
             }
-            else{
+            else {
                 setError('Failed to request tokens, Faucet balance is too low');
             }
         } catch (error) {

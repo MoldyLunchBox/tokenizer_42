@@ -8,14 +8,11 @@ import VanillaTilt from 'vanilla-tilt';
 import Panel from './components/Panel';
 
 
-const faucetContractAddress = '0x127D1a717abE6F1a99AA0cdfD6550cC4F4A587f2';
-const oceanTokenAddress = '0x35aa621aC7771Ca27d0A90320A85dBf701d022F1';
-
 
 
 const App = () => {
 
-  const [players, setPlayers] = useState({ you: 5, comp: 0 })
+  const [players, setPlayers] = useState({ you: 0, comp: 0 })
   const [gameState, setGameState] = useState("")
   const [rewards, setRewards] = useState(0)
 
@@ -31,7 +28,7 @@ const App = () => {
 
 
   useEffect(() => {
-    if (players.you!= 5)
+    if (players.you)
     setRewards(prevCount => prevCount + 1);
   }, [players.you])
 
